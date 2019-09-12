@@ -1,0 +1,15 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //AOP   https://github
+    //
+    // .com/HujiangTechnology/gradle_plugin_android_aspectjx
+    api 'org.aspectj:aspectjrt:1.8.14'
+}

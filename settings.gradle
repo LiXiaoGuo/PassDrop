@@ -1,0 +1,2 @@
+include ':app', ':framework', ':aspectj'
+rootProject.name='PassDrop'

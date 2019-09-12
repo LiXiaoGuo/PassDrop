@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SimpleTitleView">
+        <!--标题-->
+        <attr name="title" format="string" />
+        <!--标题文字大小-->
+        <attr name="titleSize" format="dimension" />
+        <!--标题文字颜色-->
+        <attr name="titleColor" format="color" />
+        <!--左边图标资源-->
+        <attr name="leftImageRes" format="reference" />
+        <!--右边图标资源-->
+        <attr name="rightImageRes" format="reference" />
+        <!--左边文字-->
+        <attr name="leftText" format="string" />
+        <!--左边文字大小，如果不设置的话，默认是标题文字大小乘以系数-->
+        <attr name="leftTextSize" format="dimension" />
+        <!--左边文字颜色，如哦不设置的话，默认是标题文字颜色-->
+        <attr name="leftTextColor" format="color" />
+        <!--右边文字-->
+        <attr name="rightText" format="string" />
+        <!--右边文字大小，如果不设置的话，默认是标题文字大小乘以系数-->
+        <attr name="rightTextSize" format="dimension" />
+        <!--右边文字颜色，如哦不设置的话，默认是标题文字颜色-->
+        <attr name="rightTextColor" format="color" />
+        <!--系数，如果不设置的话，默认是0.8f-->
+        <attr name="coefficient" format="float" />
+        <!--右边图标资源的padding值-->
+        <attr name="rightImagePadding" format="dimension" />
+        <!--左边图标资源的padding值-->
+        <attr name="leftImagePadding" format="dimension" />
+        <!--是否留出状态栏高度-->
+        <attr name="isCilpStatusBar" format="boolean"/>
+
+    </declare-styleable>
+    <id name="simple_title_line"/>
+</resources>

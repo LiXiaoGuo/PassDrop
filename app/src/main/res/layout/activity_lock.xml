@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/al_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sdfasdf"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textStyle="bold"/>
+    <com.liguo.password.view.patternlockview.PatternLockView
+        android:id="@+id/al_patternlock"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_marginTop="60dp"
+        app:correctStateColor="@color/cardview_dark_background"
+        app:normalStateColor="@color/cardview_dark_background"/>
+</LinearLayout>

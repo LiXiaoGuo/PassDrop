@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name" translatable="false">framework</string>
+    <string name="toast_permission_denied"> permission has been disabled. please go to Settings to open it</string>
+    <string name="framework_text_dialog_confirm">confirm</string>
+    <string name="framework_text_dialog_cancel">cancel</string>
+    <string name="framework_text_empty">no data</string>
+    <string name="framework_text_error">load failed, click to retry</string>
+    <string name="dl_waiting" translatable="false">加载中...</string>
+</resources>

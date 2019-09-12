@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#EB3F36</color>
+    <color name="colorPrimaryDark">#000000</color> <!-- #CACACA -->
+    <color name="colorAccent">#f15352</color>
+
+    <color name="default_divider_color">#e8e8e8</color>
+
+    <color name="title_color">#333333</color>
+    <color name="font_color">#666666</color>
+    <color name="assist_font_color">#999999</color>
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="red">#ff0000</color>
+
+
+
+</resources>
