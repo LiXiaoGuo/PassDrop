@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'android-aspectjx'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
     compileSdkVersion 28
@@ -14,6 +15,21 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        release {
+            keyAlias 'passdrop'
+            keyPassword 'passdrop'
+            storeFile file("../passdrop.jks")
+            storePassword 'passdrop'
+        }
+
+        release {
+            keyAlias 'passdrop'
+            keyPassword 'passdrop'
+            storeFile file("../passdrop.jks")
+            storePassword 'passdrop'
+        }
     }
     buildTypes {
         release {
@@ -63,3 +79,74 @@ dependencies {
 
     implementation project(':framework')
 }
+
+
+//task generateSourcesJar(type: Jar) {
+//    group = 'jar'
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//}
+//
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//
+//task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+//    outputFormat = "javadoc"
+//    outputDirectory = javadoc.destinationDir
+//}
+//
+//task generateJavadoc(type: Jar, dependsOn: dokkaJavadoc) {
+//    group = 'jar'
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+//
+//artifacts {
+//    archives generateJavadoc
+//    archives generateSourcesJar
+//}
+
+dokka {
+//    outputFormat = 'html'
+//    outputDirectory = "$buildDir/javadoc"
+//
+//    externalDocumentationLink {
+//        // Root URL of the generated documentation to link with. The trailing slash is required!
+//        url = new URL("http://github.com/me/myrepo/")
+//        // If package-list file located in non-standard location
+//        packageListUrl = new URL("file:///D:/package-list")
+//    }
+
+    classpath = configurations.compile
+    externalDocumentationLink {
+        url = new URL("file://${project(":framework").buildDir}/dokka/framework/")
+        packageListUrl = new URL("file://D:/package-list")
+    }
+}
+
+//task dokkaJavadoc(type:org.jetbrains.dokka.gradle.DokkaAndroidTask) {
+//    outputFormat = 'html'
+//    outputDirectory = "$buildDir/html"
+//    noStdlibLink =  true
+//    noJdkLink =  true
+//
+//    //允许基于每个包自定义文档生成选项
+//    //重复多个packageOptions
+//    packageOptions {
+//        prefix =  "com.liguo"  //将匹配kotlin及其所有子包
+//        //所有选项都是可选的，默认值如下：
+//        skipDeprecated =  false
+//        reportUndocumented =  true  //发出有关未记录成员的警告
+//        includeNonPublic =  false
+//    }
+//    externalDocumentationLink {
+//        // Root URL of the generated documentation to link with. The trailing slash is required!
+//        url = new URL("https://www.yidian51.com/")
+//        // If package-list file located in non-standard location
+//        packageListUrl = new URL("file:///D:/package-list")
+//    }
+
+
+//}

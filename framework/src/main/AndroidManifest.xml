@@ -2,30 +2,30 @@
     package="com.linxiao.framework">
 
     <!-- 运行安装apk -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+<!--    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>-->
     <!--获取用户设备的mac地址，在平板设备或电视盒子上，无法通过IMEI标示设备，我们会将mac地址作为用户的唯一标识。-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<!--    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>-->
     <!--允许程序获取网络信息状态，如当前的网络连接是否有效-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
     <!--允许程序改变WiFi状态-->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+<!--    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />-->
     <!--允许程序显示系统窗口-->
     <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />-->
     <!--允许程序访问摄像头进行拍照-->
-    <uses-permission android:name="android.permission.CAMERA" />
+<!--    <uses-permission android:name="android.permission.CAMERA" />-->
     <!--允许访问闪光灯-->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
+<!--    <uses-permission android:name="android.permission.FLASHLIGHT" />-->
     <!-- 调用硬件相机权限 -->
-    <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.camera.autofocus" />
+<!--    <uses-feature android:name="android.hardware.camera" />-->
+<!--    <uses-feature android:name="android.hardware.camera.autofocus" />-->
     <!--允许程序读取或写入系统设置-->
     <!--<uses-permission android:name="android.permission.WRITE_SETTINGS"/>-->
     <!--允许程序访问网络连接，可能产生GPRS流量-->
-    <uses-permission android:name="android.permission.INTERNET"/>
+<!--    <uses-permission android:name="android.permission.INTERNET"/>-->
     <!--允许程序发送短信-->
     <!--<uses-permission android:name="android.permission.SEND_SMS"/>-->
     <!--允许程序访问电话状态  获取用户设备的IMEI，通过IMEI来唯一的标识用户。-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+<!--    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
     <!--允许程序访问联系人通讯录信息-->
     <!--<uses-permission android:name="android.permission.READ_CONTACTS"/>-->
 

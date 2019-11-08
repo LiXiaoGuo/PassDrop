@@ -16,6 +16,7 @@ import com.blankj.utilcode.util.UriUtils
 import com.google.gson.Gson
 import com.liguo.password.databinding.ItemPasswordBinding
 import com.liguo.password.utils.Ciphertext
+import com.liguo.password.utils.DataPersistence
 import com.linxiao.framework.activity.BaseActivity
 import com.linxiao.framework.adapter.BaseAdapter
 import com.linxiao.framework.util.fromJson
@@ -31,7 +32,9 @@ import razerdp.basepopup.QuickPopupConfig
 import yz.yuzhua.yidian51.mananger.db.passwordDatabase
 import java.io.File
 
-
+/**
+ * 主界面
+ */
 class MainActivity : BaseActivity() {
 
     private val bsd by lazy { PasswordBottomSheetDialog(this).apply {
@@ -57,6 +60,13 @@ class MainActivity : BaseActivity() {
     override fun onCreateRootView() = R.layout.activity_main
 
     override fun onInitView(savedInstanceState: Bundle?) {
+        if(intent.data != null){
+            DataPersistence.externalFile = UriUtils.uri2File(intent.data!!)
+            startActivity<LockActivity>()
+            finish()
+            return;
+        }
+
         changeStatusBarColor(Color.TRANSPARENT,false)
 
         am_rv.apply {
@@ -64,6 +74,8 @@ class MainActivity : BaseActivity() {
             adapter = apt
             (this.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         }
+
+
     }
 
     private val qpb by lazy {
@@ -79,6 +91,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initListener() {
+        if(intent.data != null){
+            return;
+        }
         am_title.setOnRightClick {
             qpb.showPopupWindow(am_title)
         }
@@ -86,7 +101,9 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+        if(intent.data != null){ return; }
         getData()
+        disposeLgFile()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -94,30 +111,39 @@ class MainActivity : BaseActivity() {
         if(requestCode == 200 && resultCode == 200){
             getData()
         }else if(requestCode == 1 && resultCode == Activity.RESULT_OK){
-            try {
-                val uri = data?.data?:throw Exception()
-                val f = UriUtils.uri2File(uri) ?: throw Exception()
-                val json = Ciphertext.decode(f.readBytes())
-                if(json == ""){
-                    "文件解码失败".toast()
-                    return
-                }
-                val list = Gson().fromJson<List<PasswordBean>>(json)
-                var count = 0
-                list?.forEach {
-                    if(passwordDatabase.importData(it)){
-                        count ++
-                    }
-                }
-                "成功导入数量：$count 条".toast()
-                if(count>0){
-                    getData()
-                }
-            }catch (e:Exception){
-                "文件获取失败".toast()
-                e.printStackTrace()
-            }
+            DataPersistence.externalFile = UriUtils.uri2File(intent.data!!)
+            disposeLgFile()
+        }
+    }
 
+    /**
+     * 处理LG文件
+     */
+    fun disposeLgFile(){
+        if(DataPersistence.externalFile == null) return
+        try {
+            val f = DataPersistence.externalFile!!
+            val json = Ciphertext.decode(f.readBytes())
+            if(json == ""){
+                "文件解码失败".toast()
+                return
+            }
+            val list = Gson().fromJson<List<PasswordBean>>(json)
+            var count = 0
+            list?.forEach {
+                if(passwordDatabase.importData(it)){
+                    count ++
+                }
+            }
+            "成功导入数量：$count 条".toast()
+            if(count>0){
+                getData()
+            }
+        }catch (e:Exception){
+            "文件获取失败".toast()
+            e.printStackTrace()
+        }finally {
+            DataPersistence.externalFile = null
         }
     }
 
@@ -166,5 +192,13 @@ class MainActivity : BaseActivity() {
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             startActivityForResult(intent,1)
         })
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if(intent?.data != null){
+            DataPersistence.externalFile = UriUtils.uri2File(intent.data!!)
+        }
+        disposeLgFile()
     }
 }

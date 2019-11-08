@@ -8,6 +8,7 @@ import com.linxiao.framework.util.logi
 import com.linxiao.framework.util.toast
 import kotlinx.android.synthetic.main.diglog_bottom_password.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.share
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 
@@ -16,7 +17,7 @@ import org.jetbrains.anko.startActivityForResult
  * @author Extends
  * @date 2019/9/11/011
  */
-class PasswordBottomSheetDialog:BottomSheetDialog {
+class PasswordBottomSheetDialog(context: Context) : BottomSheetDialog(context) {
 
     private var passwordBean:PasswordBean?=null
 
@@ -25,8 +26,27 @@ class PasswordBottomSheetDialog:BottomSheetDialog {
      */
     var deleteCall : ((pb:PasswordBean?) -> Unit)? = null
 
-    constructor(context:Context):super(context){
+    init {
         setContentView(R.layout.diglog_bottom_password)
+
+        dialog_bottom_password_copy_share.onClick {
+            if(passwordBean != null){
+                val shareStr = buildString {
+                    if(!passwordBean!!.name.isNullOrEmpty()){
+                        appendln(passwordBean!!.name)
+                    }
+                    if(!passwordBean!!.account.isNullOrEmpty()){
+                        append("账号：").appendln(passwordBean!!.account)
+                    }
+                    if(!passwordBean!!.password.isNullOrEmpty()){
+                        append("密码：").appendln(passwordBean!!.password)
+                    }
+                    append("by PassDrop share")
+                }
+                (context as Activity?)?.share(shareStr)
+            }
+            dismiss()
+        }
         dialog_bottom_password_copy_accase.onClick {
             copy(passwordBean?.account)
         }
@@ -45,6 +65,9 @@ class PasswordBottomSheetDialog:BottomSheetDialog {
         }
     }
 
+    /**
+     * sdf
+     */
     fun show(pb: PasswordBean) {
         passwordBean = pb
         super.show()
